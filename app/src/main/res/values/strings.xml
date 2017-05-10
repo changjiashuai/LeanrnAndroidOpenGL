@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">LeanrnAndroidOpenGL</string>
+    <string-array name="titles">
+        <item>1.1 hello_window</item>
+        <item>1.2 hello_triangle</item>
+        <item>1.3 shaders</item>
+        <item>1.4 textures</item>
+        <item>1.5 transformations</item>
+        <item>1.6 coordinate_systems</item>
+    </string-array>
+</resources>
