@@ -44,7 +44,7 @@ public class HelloTriangleActivity extends AppCompatActivity {
         @Override
         public void onDrawFrame(GL10 gl) {
             GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
-            int[] vertices = initVertices();
+            float[] vertices = initVertices();
             initIndices();
         }
 
@@ -52,14 +52,22 @@ public class HelloTriangleActivity extends AppCompatActivity {
             return null;
         }
 
-        private int[] initVertices() {
-            return null;
+        private float[] initVertices() {
+            float[] vertices = {
+                    -0.5f, -0.5f, 0.0f,
+                    0.5f, -0.5f, 0.0f,
+                    0.0f, 0.5f, 0.0f
+            };
+            return vertices;
+        }
+
+        private void createVBO(){
+            int[] buffers = new int[1];
+            GLES20.glGenBuffers(1, buffers, 0);
+            GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, buffers[0]);
         }
 
     }
-
-
-
 
 
 
