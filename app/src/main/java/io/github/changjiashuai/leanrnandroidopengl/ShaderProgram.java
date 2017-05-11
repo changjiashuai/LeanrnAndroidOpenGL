@@ -41,4 +41,12 @@ public class ShaderProgram {
         }
         return program;
     }
+
+    public static void useProgram(int program) {
+        GLES20.glUseProgram(program);
+    }
+
+    public static void deleteProgram(int program) {
+        GLES20.glDeleteProgram(program);
+    }
 }
