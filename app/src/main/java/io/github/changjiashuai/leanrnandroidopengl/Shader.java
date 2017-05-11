@@ -13,7 +13,7 @@ public class Shader {
 
     private static final String TAG = "Shader";
 
-    public int load(int shaderType, String source) {
+    public static int load(int shaderType, String source) {
         int shader = GLES20.glCreateShader(shaderType);
         if (shader != 0) {
             GLES20.glShaderSource(shader, source);
@@ -21,7 +21,7 @@ public class Shader {
             int[] compiled = new int[1];
             GLES20.glGetShaderiv(shader, GLES20.GL_COMPILE_STATUS, compiled, 0);
             if (compiled[0] == 0) {
-                Log.e(TAG, "load: Could not compile shader "+shaderType+" error: " + GLES20.glGetShaderInfoLog(shader));
+                Log.e(TAG, "load: Could not compile shader " + shaderType + " error: " + GLES20.glGetShaderInfoLog(shader));
                 GLES20.glDeleteShader(shader);
                 shader = 0;
             }
