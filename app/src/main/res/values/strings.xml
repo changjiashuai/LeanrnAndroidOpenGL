@@ -11,4 +11,5 @@
 
     <string name="hello_triangle">你好, 三角形</string>
     <string name="shaders">着色器</string>
+    <string name="textures">纹理</string>
 </resources>

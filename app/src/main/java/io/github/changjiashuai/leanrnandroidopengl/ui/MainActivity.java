@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 navigateToActivity(ShadersActivity.class);
                 break;
             case 3:
+                navigateToActivity(TextureActivity.class);
                 break;
             case 4:
                 break;

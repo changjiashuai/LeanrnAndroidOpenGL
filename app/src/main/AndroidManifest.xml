@@ -26,6 +26,9 @@
         <activity
             android:name=".ui.ShadersActivity"
             android:label="@string/shaders" />
+        <activity
+            android:name=".ui.TextureActivity"
+            android:label="@string/textures" />
     </application>
 
 </manifest>
