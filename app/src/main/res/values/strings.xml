@@ -8,4 +8,7 @@
         <item>1.5 transformations</item>
         <item>1.6 coordinate_systems</item>
     </string-array>
+
+    <string name="hello_triangle">你好, 三角形</string>
+    <string name="shaders">着色器</string>
 </resources>

@@ -31,9 +31,9 @@ public class Texture {
      * @param pixels 指定内存中指向图像数据的指针
      */
     public void bindTexture(int format, int width, int height, int type, Buffer pixels) {
-        int[] texures = new int[1];
-        GLES20.glGenTextures(GLES20.GL_TEXTURE_2D, texures, 0);
-        mTextureId = texures[0];
+        int[] textures = new int[1];
+        GLES20.glGenTextures(GLES20.GL_TEXTURE_2D, textures, 0);
+        mTextureId = textures[0];
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureId);
         GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER,
                 GLES20.GL_NEAREST);

@@ -1,11 +1,13 @@
-package io.github.changjiashuai.leanrnandroidopengl;
+package io.github.changjiashuai.leanrnandroidopengl.ui;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+
+import io.github.changjiashuai.leanrnandroidopengl.R;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemClickListener {
 
@@ -29,6 +31,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 navigateToActivity(HelloTriangleActivity.class);
                 break;
             case 2:
+                navigateToActivity(ShadersActivity.class);
                 break;
             case 3:
                 break;

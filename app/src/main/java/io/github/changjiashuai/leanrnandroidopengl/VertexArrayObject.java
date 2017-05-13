@@ -37,8 +37,8 @@ public class VertexArrayObject {
         mVAOHandle = arrays[0];
         GLES30.glBindVertexArray(mVAOHandle);
         //bind vbo
-        VertexBufferObject vbo = new VertexBufferObject();
-        vbo.create();
+//        VertexBufferObject vbo = new VertexBufferObject();
+//        vbo.create();
     }
 
     public void unBindVAO() {

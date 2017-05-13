@@ -6,8 +6,9 @@ import android.opengl.GLES20;
  * Email: changjiashuai@gmail.com
  *
  * Created by CJS on 2017/5/10 22:51.
+ *
+ * 帧缓冲
  */
-
 public class FrameBufferObject {
 
     private static final String TAG = "FrameBufferObject";

@@ -5,6 +5,7 @@ import android.opengl.GLES20;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
+import java.nio.ShortBuffer;
 
 /**
  * Email: changjiashuai@gmail.com
@@ -14,27 +15,58 @@ import java.nio.FloatBuffer;
 
 public class VertexBufferObject {
 
-    private float[] vertices = {
-            -0.5f, -0.5f, 0.0f,
-            0.5f, -0.5f, 0.0f,
-            0.0f, 0.5f, 0.0f
-    };
+    private float[] mVertices;
+    private short[] mIndices;
+    private FloatBuffer mVertexBuffer;
+    private ShortBuffer mIndexBuffer;
 
-    private FloatBuffer mVbb;
+    public FloatBuffer getVertexBuffer() {
+        return mVertexBuffer;
+    }
 
-    public VertexBufferObject() {
-        ByteBuffer bb = ByteBuffer.allocateDirect(vertices.length * 4);
-        bb.order(ByteOrder.nativeOrder());
-        mVbb = bb.asFloatBuffer();
-        mVbb.put(vertices);
-        mVbb.position(0);
+    public ShortBuffer getIndexBuffer() {
+        return mIndexBuffer;
+    }
+
+    public VertexBufferObject(float[] vertices) {
+        ByteBuffer vbb = ByteBuffer.allocateDirect(vertices.length * 4);
+        vbb.order(ByteOrder.nativeOrder());
+        mVertexBuffer = vbb.asFloatBuffer();
+        mVertexBuffer.put(vertices);
+        mVertexBuffer.position(0);
+        mVertices = vertices;
+    }
+
+    public VertexBufferObject(float[] vertices, short[] indices) {
+        ByteBuffer vbb = ByteBuffer.allocateDirect(vertices.length * 4);
+        vbb.order(ByteOrder.nativeOrder());
+        mVertexBuffer = vbb.asFloatBuffer();
+        mVertexBuffer.put(vertices);
+        mVertexBuffer.position(0);
+        mVertices = vertices;
+
+        ByteBuffer ibb = ByteBuffer.allocateDirect(indices.length * 2);
+        ibb.order(ByteOrder.nativeOrder());
+        mIndexBuffer = ibb.asShortBuffer();
+        mIndexBuffer.put(indices);
+        mIndexBuffer.position(0);
+        mIndices = indices;
     }
 
     public void create() {
         int[] buffers = new int[1];
         GLES20.glGenBuffers(1, buffers, 0);
         GLES20.glBindBuffer(GLES20.GL_ARRAY_BUFFER, buffers[0]);
-        GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, vertices.length * 4, mVbb, GLES20.GL_STATIC_DRAW);
+        GLES20.glBufferData(GLES20.GL_ARRAY_BUFFER, mVertices.length * 4,
+                mVertexBuffer, GLES20.GL_STATIC_DRAW);
+    }
+
+    public void createIndices() {
+        int[] buffers = new int[1];
+        GLES20.glGenBuffers(1, buffers, 0);
+        GLES20.glBindBuffer(GLES20.GL_ELEMENT_ARRAY_BUFFER, buffers[0]);
+        GLES20.glBufferData(GLES20.GL_ELEMENT_ARRAY_BUFFER, mIndices.length * 2,
+                mIndexBuffer, GLES20.GL_STATIC_DRAW);
     }
 
     /**
@@ -60,8 +92,24 @@ public class VertexBufferObject {
      * offset: 它表示位置数据在缓冲中起始位置的偏移量(Offset)。由于位置数据在数组的开头，所以这里是0。
      * 我们会在后面详细解释这个参数。
      */
-    public void setAttrLocations() {
-        GLES20.glVertexAttribPointer(0, 3, GLES20.GL_FLOAT, false, 3 * GLES20.GL_FLOAT, 0);
-        GLES20.glEnableVertexAttribArray(0);
+    public void setAttrLocations(int attrHandle) {
+        GLES20.glVertexAttribPointer(attrHandle, 3, GLES20.GL_FLOAT, false, 3 * 4, 0);
+        GLES20.glEnableVertexAttribArray(attrHandle);
+    }
+
+    public int getAttribLocation(int program, String name) {
+        return GLES20.glGetAttribLocation(program, name);
+    }
+
+    public void setAttrLocations(int program, String name, int size) {
+        int index = GLES20.glGetAttribLocation(program, name);
+        GLES20.glVertexAttribPointer(index, size, GLES20.GL_FLOAT, false, size * 4, 0);
+        GLES20.glEnableVertexAttribArray(index);
+    }
+
+    public void uploadVerticesBuffer(int program, String name, int size) {
+        int index = GLES20.glGetAttribLocation(program, name);
+        GLES20.glVertexAttribPointer(index, size, GLES20.GL_FLOAT, false, 0, mVertexBuffer);
+        GLES20.glEnableVertexAttribArray(index);
     }
 }

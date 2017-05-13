@@ -1,4 +1,4 @@
-package io.github.changjiashuai.leanrnandroidopengl;
+package io.github.changjiashuai.leanrnandroidopengl.utils;
 
 import android.content.res.Resources;
 import android.opengl.GLES20;
