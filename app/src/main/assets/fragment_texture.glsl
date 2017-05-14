@@ -1,3 +1,5 @@
+precision mediump float;
+
 uniform sampler2D uTexture1;
 uniform sampler2D uTexture2;
 
