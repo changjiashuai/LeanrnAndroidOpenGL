@@ -4,9 +4,11 @@ import android.content.res.Resources;
 import android.opengl.GLES20;
 import android.util.Log;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 
 /**
  * Email: changjiashuai@gmail.com
@@ -36,6 +38,23 @@ public class OpenGLUtils {
             e.printStackTrace();
         }
         return result;
+    }
+
+    public static String loadFromRawFile(Resources resources, int resId) {
+        InputStream inputStream = resources.openRawResource(resId);
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+            StringBuilder sb = new StringBuilder();
+            String line;
+            while ((line = reader.readLine()) != null) {
+                sb.append(line).append("\n");
+            }
+            reader.close();
+            return sb.toString();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
     public static void checkError(String op) {

@@ -1,6 +1,8 @@
 package io.github.changjiashuai.leanrnandroidopengl;
 
+import android.graphics.Bitmap;
 import android.opengl.GLES20;
+import android.opengl.GLUtils;
 
 import java.nio.Buffer;
 
@@ -30,7 +32,7 @@ public class Texture {
      *               GL_UNSIGNED_SHORT_5_5_5_1
      * @param pixels 指定内存中指向图像数据的指针
      */
-    public void bindTexture(int format, int width, int height, int type, Buffer pixels) {
+    public int initTexture(int format, int width, int height, int type, Buffer pixels) {
         int[] textures = new int[1];
         GLES20.glGenTextures(GLES20.GL_TEXTURE_2D, textures, 0);
         mTextureId = textures[0];
@@ -45,6 +47,29 @@ public class Texture {
                 GLES20.GL_CLAMP_TO_EDGE);
         GLES20.glTexImage2D(GLES20.GL_TEXTURE_2D, 0, format, width, height,
                 0, format, type, pixels);
+        return mTextureId;
+    }
+
+    public int initTexture(Bitmap bitmap) {
+        int[] textures = new int[1];
+        GLES20.glGenTextures(GLES20.GL_TEXTURE_2D, textures, 0);
+        mTextureId = textures[0];
+        GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureId);
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER,
+                GLES20.GL_NEAREST);
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MAG_FILTER,
+                GLES20.GL_NEAREST);
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_S,
+                GLES20.GL_CLAMP_TO_EDGE);
+        GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_WRAP_T,
+                GLES20.GL_CLAMP_TO_EDGE);
+        GLUtils.texImage2D(GLES20.GL_TEXTURE_2D, 0, bitmap, 0);
+        return mTextureId;
+    }
+
+    public void bind(int i){
+        GLES20.glActiveTexture(mTextureId);
+        GLES20.glBindTexture(GLES20.GL_TEXTURE0 + i, mTextureId);
     }
 
     public void unBind() {
