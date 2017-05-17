@@ -32,10 +32,10 @@ public class Texture {
      *               GL_UNSIGNED_SHORT_5_5_5_1
      * @param pixels 指定内存中指向图像数据的指针
      */
-    public int initTexture(int format, int width, int height, int type, Buffer pixels) {
+    public static int initTexture(int format, int width, int height, int type, Buffer pixels) {
         int[] textures = new int[1];
         GLES20.glGenTextures(GLES20.GL_TEXTURE_2D, textures, 0);
-        mTextureId = textures[0];
+        int mTextureId = textures[0];
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureId);
         GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER,
                 GLES20.GL_NEAREST);
@@ -50,10 +50,10 @@ public class Texture {
         return mTextureId;
     }
 
-    public int initTexture(Bitmap bitmap) {
+    public static int initTexture(Bitmap bitmap) {
         int[] textures = new int[1];
         GLES20.glGenTextures(GLES20.GL_TEXTURE_2D, textures, 0);
-        mTextureId = textures[0];
+        int mTextureId = textures[0];
         GLES20.glBindTexture(GLES20.GL_TEXTURE_2D, mTextureId);
         GLES20.glTexParameterf(GLES20.GL_TEXTURE_2D, GLES20.GL_TEXTURE_MIN_FILTER,
                 GLES20.GL_NEAREST);

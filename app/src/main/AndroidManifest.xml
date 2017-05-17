@@ -29,6 +29,7 @@
         <activity
             android:name=".ui.TextureActivity"
             android:label="@string/textures" />
+        <activity android:name=".ui.FrameBufferActivity"/>
     </application>
 
 </manifest>
